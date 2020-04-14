@@ -41,18 +41,17 @@ $serial = new PhpSerial;
            if ($serial->writeReadTimeout("AT+CMGS=\"".$num_tel."\"\r",">") !== FALSE) {
              if ($serial->writeReadTimeout($str.chr(26)."\r","CMGS",$timeout) !== FALSE) {
                $serial->deviceClose();
-               addLogEvent(0,"sendSMS($str, $num_tel, $timeout)");
                return true ;
              }
-             else {addLogEvent(1,"[TIME-OUT] [AT+CMGS] sendSMS($str, $num_tel, $timeout)");$serial->deviceClose();return false ;}
+             else {$serial->deviceClose();return false ;}
            }
-           else {addLogEvent(1,"[AT+CMGS] sendSMS($str, $num_tel, $timeout)");$serial->deviceClose();return false ;}
+           else {$serial->deviceClose();return false ;}
          }
-         else {addLogEvent(1,"[AT+CSCS=\"GSM\"] sendSMS($str, $num_tel, $timeout)");$serial->deviceClose();return false ;}
+         else {$serial->deviceClose();return false ;}
        }
-       else {addLogEvent(1,"[AT+CMGF=1] sendSMS($str, $num_tel, $timeout)");$serial->deviceClose();return false ;}
+       else {$serial->deviceClose();return false ;}
    }
-   else {addLogEvent(1,"[AT+CSMP=17,167,0,16] sendSMS($str, $num_tel, $timeout)");$serial->deviceClose();return false ;}
+   else {$serial->deviceClose();return false ;}
  }
  
  
